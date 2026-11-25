@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.io import wavfile
 
 sample_rate = 44100
 duration = 2.0
@@ -11,6 +12,8 @@ tone =  np.sin(2 * np.pi * frequency * t)
 print("number of samples:", len(tone))
 print("first 5 values:", tone[:5])
 
+audio = (0.5 * tone * 32767).astype(np.int16)
+wavfile.write("tone_440hz.wav", sample_rate, audio)
 plt.plot(t[:500], tone[:500])
 plt.xlabel("Time (s)")
 plt.ylabel("Amplitude")
